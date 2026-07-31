@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# SPA routing - /movie/123 jaisi kisi bhi route par refresh karne par
+# Netlify index.html hi serve kare, warna 404 aata hai.
+# Note: /.netlify/functions/* ye rule se pehle handle hota hai.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
