@@ -1,0 +1,357 @@
+/* Tailwind v4 ko import karte hain - isse saari utility classes mil jaati hain */
+@import "tailwindcss";
+
+/*
+  ===== SOFIA PRO FONT =====
+
+  Ye hamara khareeda hua (paid) font hai. Files src/assets/fonts/ me rakhi hain,
+  isliye internet ke bina bhi chalega aur Google Fonts ki zarurat nahi padegi.
+
+  @font-face browser ko batata hai ki "Sofia Pro" naam ka font kahan rakha hai.
+
+  Har weight (motai) ki apni alag file hoti hai. Isliye 5 baar likha hai
+  aur har baar font-weight alag diya hai. Isse jab hum CSS me
+  font-bold (700) likhenge, browser apne aap Bold wali file uthayega.
+
+  font-display: swap ka matlab - font aane tak text gayab na ho,
+  pehle normal font me dikh jaye aur baad me Sofia Pro me badal jaye.
+*/
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("../assets/fonts/SofiaPro-Regular.otf") format("opentype");
+  font-weight: 400; /* normal text */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("../assets/fonts/SofiaPro-Medium.otf") format("opentype");
+  font-weight: 500; /* thoda mota */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("../assets/fonts/SofiaPro-SemiBold.otf") format("opentype");
+  font-weight: 600; /* semi bold */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("../assets/fonts/SofiaPro-Bold.otf") format("opentype");
+  font-weight: 700; /* bold - headings ke liye */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("../assets/fonts/SofiaPro-Black.otf") format("opentype");
+  font-weight: 800 900; /* sabse mota - logo aur hero title ke liye */
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+  Ye hamari app ki theme hai (Blue + Black)
+  @theme ke andar likhi values Tailwind classes ban jaati hain
+  Jaise --color-brand-500 se class "bg-brand-500" ya "text-brand-500" milti hai
+*/
+@theme {
+  /* Blue - hamara primary color */
+  --color-brand-400: #3b82f6; /* halka blue - text aur icons */
+  --color-brand-500: #2563eb; /* main blue - buttons */
+  --color-brand-600: #1d4ed8; /* gehra blue - hover */
+
+  /* Black + Dark Gray - background aur cards ke liye */
+  --color-ink-950: #0a0a0a; /* poora page ka background */
+  --color-ink-900: #121212; /* thoda halka background */
+  --color-ink-800: #1c1c1c; /* card ka background */
+  --color-ink-700: #2a2a2a; /* border aur skeleton */
+
+  /* Text colors */
+  --color-muted: #a1a1aa; /* secondary / light gray text */
+
+  /*
+    Poore app me Sofia Pro hi chalega - headings me bhi aur normal text me bhi.
+    Ek hi font family use karne se design saaf aur professional lagta hai.
+
+    Do naam isliye rakhe hain taaki aage chalkar headings ka font
+    alag karna ho to sirf --font-display badalna pade.
+
+    Peeche "Segoe UI, system-ui" fallback hai - agar kabhi Sofia Pro
+    load na ho to text bina font ke ajeeb na dikhe.
+  */
+  --font-display: "Sofia Pro", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Sofia Pro", "Segoe UI", system-ui, sans-serif;
+}
+
+/*
+  ===== THEME VARIABLES (Dark / Light) =====
+
+  Upar wale colors fixed hain. Lekin niche wale "app-" variables
+  theme badalne par change hote hain.
+
+  ThemeContext sirf <html> tag par data-theme="light" laga deta hai,
+  aur poori app ka color apne aap badal jaata hai.
+*/
+:root {
+  /*
+    Brand color yaha bhi rakha hai kyunki MUI ke sx prop me
+    Tailwind class nahi chalti. Wahan hum var(--brand) likhte hain.
+
+    Poore app ka color badalna ho to bas ye 3 lines badal do.
+  */
+  --brand: #3b82f6; /* main blue */
+  --brand-dark: #1d4ed8; /* hover wala gehra blue */
+  --brand-soft: rgba(59, 130, 246, 0.15); /* halka blue background */
+
+  --app-bg: #0a0a0a; /* page background */
+  --app-card: #121212; /* card background */
+  --app-card-2: #1c1c1c; /* thoda alag card / skeleton */
+  --app-line: #2a2a2a; /* border line */
+  --app-text: #ffffff; /* main text */
+  --app-text-sub: #a1a1aa; /* secondary gray text */
+  --app-nav: rgba(10, 10, 10, 0.75); /* transparent navbar */
+}
+
+/*
+  Light theme ke liye wahi variables, bas alag values.
+
+  Dhyaan dein: yaha poora safed (#ffffff) use nahi kiya.
+  Safed background aankhon me chubhta hai aur cards page se alag nahi dikhte.
+  Isliye page ko halka grey rakha hai aur cards ko usse thoda halka -
+  isse card apne aap "upar uthe hue" lagte hain.
+*/
+[data-theme="light"] {
+  --app-bg: #e6e6e9; /* page ka halka grey background */
+  --app-card: #f2f2f4; /* card - page se thoda halka */
+  --app-card-2: #dcdce0; /* poster ki khaali jagah / skeleton */
+  --app-line: #c9c9cf; /* border line */
+  --app-text: #18181b; /* main text - poora kaala nahi, thoda soft */
+  --app-text-sub: #52525b; /* secondary gray text */
+  --app-nav: rgba(230, 230, 233, 0.85); /* navbar */
+}
+
+/*
+  Base styles - poore app par apply hote hain
+*/
+@layer base {
+  html {
+    scroll-behavior: smooth; /* smooth scroll for better UX */
+  }
+
+  /*
+    Dhyaan dein: body ka background aur text color yaha se NAHI aata.
+    Wo muiTheme.js ke MuiCssBaseline se aata hai.
+
+    Kyun? Kyunki MUI ki CSS layer ke bahar hoti hai aur wo hamesha
+    yaha likhi CSS ko hara deti thi. Do jagah likhne se confusion hoti,
+    isliye ek hi jagah rakha hai.
+  */
+  body {
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+
+  /* Link ka default underline hata rahe hain */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+/*
+  Custom utilities - inhe hum Tailwind class ki tarah use kar sakte hain
+*/
+@layer utilities {
+  /* Scrollbar ko chhupata hai (movie rows me kaam aata hai) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Page load hone par content halke se fade-in hota hai */
+  .fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  /* Hero banner ke liye upar se neeche slide + fade */
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  /*
+    ===== SEMANTIC COLOR CLASSES =====
+    Component me hum "bg-ink-950" ki jagah "bg-surface" likhte hain.
+    Faayda: theme dark se light hote hi ye apne aap sahi color le lete hain.
+  */
+  .bg-surface {
+    background-color: var(--app-bg);
+  }
+  .bg-card {
+    background-color: var(--app-card);
+  }
+  .bg-card-2 {
+    background-color: var(--app-card-2);
+  }
+  .bg-nav {
+    background-color: var(--app-nav);
+  }
+  .text-main {
+    color: var(--app-text);
+  }
+  .text-sub {
+    color: var(--app-text-sub);
+  }
+  .border-line {
+    border-color: var(--app-line);
+  }
+
+  /*
+    Ye class jis bhi text par lagayenge, wo hamare display font (Sofia Pro) me dikhega.
+    Hum ise logo, hero title aur section headings par use karte hain.
+  */
+  .text-display {
+    font-family: var(--font-display);
+    /* thoda kasa hua spacing bade headings me premium look deta hai */
+    letter-spacing: -0.02em;
+  }
+
+  /*
+    Hero image ke upar kaala parda (scrim).
+
+    Do kaam karta hai:
+    1. Beech me kaala rehta hai taaki safed text image par saaf padhe
+    2. Sabse niche page ke background color me mil jaata hai (var(--app-bg))
+
+    Point 2 zaruri hai. Pehle yaha #0a0a0a (kaala) fix likha tha,
+    to light theme me hero ke niche ek kaali patti dikhti thi
+    aur wo page se alag (toota hua) lagta tha.
+  */
+  .hero-fade-bottom {
+    background: linear-gradient(
+      to top,
+      /* sirf sabse niche page ke color me ghul jao (seam na dikhe) */ var(--app-bg) 0%,
+      rgba(0, 0, 0, 0.62) 4%,
+      /* parda aur halka kar diya - ab image kaafi saaf dikhti hai */ rgba(0, 0, 0, 0.16) 16%,
+      transparent 38%
+    );
+  }
+
+  /* Hero ke left side ka parda - text left me hai isliye wahan gehra chahiye */
+  .hero-fade-left {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.55) 40%,
+      transparent 80%
+    );
+  }
+
+  /* Blue wala gradient - buttons aur headings me use hota hai */
+  .brand-gradient {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  }
+
+  /* Card ke upar blue glow shadow - hover par dikhta hai */
+  .card-glow:hover {
+    box-shadow: 0 12px 34px -8px rgba(59, 130, 246, 0.5);
+  }
+
+  /*
+    Movie row ke dono kinaron par page ke rang ki halki parat.
+    Isse scroll karte waqt aadha kata hua card kinare par ghul jaata hai.
+
+    var(--app-bg) use kiya hai, isliye light aur dark dono theme me
+    ye apne aap sahi rang le leti hai.
+  */
+  .row-fade-left {
+    background: linear-gradient(to right, var(--app-bg) 30%, transparent 100%);
+  }
+  .row-fade-right {
+    background: linear-gradient(to left, var(--app-bg) 30%, transparent 100%);
+  }
+
+  /*
+    Horizontal row me smooth scroll chale, aur har card
+    theek jagah par aakar ruke.
+
+    "mandatory" ka matlab: scroll rukne par card hamesha
+    apni sahi jagah par set ho jayega - beech me adha kata hua nahi rukega.
+
+    Pehle "proximity" tha, jisme browser marzi se snap karta tha.
+    Isse scroll karne ke baad card screen ki deewar se chipak jaata tha
+    aur logo/heading ke 40px gap se match nahi karta tha.
+  */
+  .row-scroll {
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+  .row-scroll > * {
+    scroll-snap-align: start;
+  }
+
+  /* Lamba text 2 ya 3 line ke baad cut ho jaye */
+  .clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Neeche se upar aane wali animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+  Page ka main scrollbar bhi theme jaisa dikhe.
+  Yaha bhi wahi app- variables use kiye hain, isliye light mode me
+  scrollbar apne aap halka ho jaata hai.
+*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--app-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--app-line);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand);
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="description" content="MegaMovies - browse trending movies and TV shows, search titles, and build your own watchlist." />
+
+    <!--
+      Favicons - browser tab me dikhne wale chhote icons.
+
+      Alag-alag device ko alag size chahiye hota hai:
+      .ico  -> purane browsers
+      .svg  -> naye browsers (har size par saaf dikhta hai)
+      apple-touch-icon -> iPhone/iPad me home screen par
+      manifest -> Android me "Add to Home Screen" ke liye
+    -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!--
+      Font ke liye yaha koi <link> nahi hai.
+
+      Hum Sofia Pro use kar rahe hain jo project ke andar hi rakha hai
+      (src/assets/fonts/). Uska setup src/styles/index.css me @font-face se hua hai.
+
+      Faayda: internet ke bina bhi font chalta hai aur page thoda tez khulta hai.
+    -->
+    <title>MegaMovies</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
