@@ -4,7 +4,7 @@ A Netflix-style movie and TV show discovery app built with React 19, Vite, Tailw
 
 ## 🌐 Live Demo
 
-🚀 **Live Website:** https://sachin-codes01-portfolio.netlify.app/
+🚀 **Live Website:** https://megamovies-webapp.netlify.app
 
 ## 📸 Screenshot
 
