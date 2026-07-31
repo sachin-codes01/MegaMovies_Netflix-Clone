@@ -5,9 +5,8 @@
   to sirf yahi file change karni padegi, baaki 20 files ko haath nahi lagana padega.
 */
 
-// CORS problem se bachne ke liye proxy - ye pehle se project me use ho raha tha
-const PROXY_URL = "https://corsproxy.io/?";
-
+// TMDB API browser se seedhe call ki ja sakti hai (TMDB khud CORS allow karta hai),
+// isliye kisi proxy ki zaroorat nahi hai.
 // TMDB ka base URL
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -26,7 +25,7 @@ export async function fetchFromTmdb(endpoint, params = {}) {
   // api_key ke saath baaki params ko URL query string me badal rahe hain
   const searchParams = new URLSearchParams({ api_key: API_KEY, ...params });
 
-  const finalUrl = `${PROXY_URL}${TMDB_BASE_URL}/${endpoint}?${searchParams.toString()}`;
+  const finalUrl = `${TMDB_BASE_URL}/${endpoint}?${searchParams.toString()}`;
 
   const response = await fetch(finalUrl);
 
