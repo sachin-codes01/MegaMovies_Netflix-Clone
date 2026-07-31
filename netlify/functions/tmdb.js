@@ -8,7 +8,12 @@
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
 export async function handler(event) {
-  const endpoint = event.path.replace(/^\/\.netlify\/functions\/tmdb\/?/, "");
+  // When invoked via the /api/tmdb/* redirect, event.path is the ORIGINAL
+  // request path (e.g. "/api/tmdb/movie/550"), not the rewritten
+  // "/.netlify/functions/tmdb/..." form - so both prefixes must be handled.
+  const endpoint = event.path
+    .replace(/^\/api\/tmdb\/?/, "")
+    .replace(/^\/\.netlify\/functions\/tmdb\/?/, "");
 
   const searchParams = new URLSearchParams(event.queryStringParameters || {});
   searchParams.set("api_key", process.env.TMDB_KEY);
