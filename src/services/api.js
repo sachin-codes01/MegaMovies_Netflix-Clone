@@ -5,16 +5,14 @@
   to sirf yahi file change karni padegi, baaki 20 files ko haath nahi lagana padega.
 */
 
-/*
-  Ab hum TMDB ko seedha call nahi karte.
+// CORS problem se bachne ke liye proxy - ye pehle se project me use ho raha tha
+const PROXY_URL = "https://corsproxy.io/?";
 
-  Kyun: kai ISPs api.themoviedb.org ko block kar dete hain, aur key bhi
-  client bundle me dikh jaati thi. Isliye apni hi Netlify function ko call
-  karte hain (netlify/functions/tmdb.js), jo server se TMDB ko poochti hai.
+// TMDB ka base URL
+const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
-  Key ab server par TMDB_KEY naam se rehti hai - VITE_ prefix ke bina.
-*/
-const API_ENDPOINT = "/.netlify/functions/tmdb";
+// API key .env file se aati hai (VITE_TMDB_KEY)
+const API_KEY = import.meta.env.VITE_TMDB_KEY;
 
 /*
   Ye main function hai jo TMDB se data laata hai.
@@ -25,10 +23,10 @@ const API_ENDPOINT = "/.netlify/functions/tmdb";
   Example: fetchFromTmdb("movie/popular", { page: 1 })
 */
 export async function fetchFromTmdb(endpoint, params = {}) {
-  // endpoint aur baaki params function ko bhej rahe hain - api_key server lagata hai
-  const searchParams = new URLSearchParams({ endpoint, ...params });
+  // api_key ke saath baaki params ko URL query string me badal rahe hain
+  const searchParams = new URLSearchParams({ api_key: API_KEY, ...params });
 
-  const finalUrl = `${API_ENDPOINT}?${searchParams.toString()}`;
+  const finalUrl = `${PROXY_URL}${TMDB_BASE_URL}/${endpoint}?${searchParams.toString()}`;
 
   const response = await fetch(finalUrl);
 
