@@ -172,7 +172,7 @@ npm install
 Create a `.env` file in the project root:
 
 ```env
-VITE_TMDB_KEY=your_tmdb_api_key
+TMDB_KEY=your_tmdb_api_key
 ```
 
 Get a free key at [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api).
@@ -203,16 +203,16 @@ npm run lint      # run ESLint across the project
 ## Environment Variables
 
 ```env
-VITE_TMDB_KEY=your_tmdb_api_key
+TMDB_KEY=your_tmdb_api_key
 ```
 
-> The `.env` file is excluded from version control using `.gitignore`.
+> The `.env` file is excluded from version control using `.gitignore`. Note there's no `VITE_` prefix — the key is only read server-side (by the Netlify Function and the Vite dev-server proxy), so it's never bundled into the client JS. When deploying, set `TMDB_KEY` in your hosting provider's environment variables.
 
 ## Notes
 
 - **This is a demo sign-in, not real authentication.** No password is asked, nothing is sent to a server, and nothing is verified. It exists only so that each email gets its own watchlist and favorites. Real Google OAuth would need a Google Cloud client ID and a backend to verify the token.
 - **All data lives in the browser.** Your account, lists and theme are stored in `localStorage`, which means they are per-device and per-browser. Clearing site data clears them.
-- **TMDB calls go through a public CORS proxy** (`corsproxy.io`) because TMDB is called directly from the browser. For production traffic you'd move these calls behind your own small backend so the API key never reaches the client.
+- **TMDB calls go through a Netlify Function proxy** (`netlify/functions/tmdb.js`) instead of being called directly from the browser. This keeps the API key out of the client bundle and avoids client-side ISP blocks on `api.themoviedb.org`.
 
 ## Tech Highlights
 

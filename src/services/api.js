@@ -5,13 +5,12 @@
   to sirf yahi file change karni padegi, baaki 20 files ko haath nahi lagana padega.
 */
 
-// TMDB API browser se seedhe call ki ja sakti hai (TMDB khud CORS allow karta hai),
-// isliye kisi proxy ki zaroorat nahi hai.
-// TMDB ka base URL
-const TMDB_BASE_URL = "https://api.themoviedb.org/3";
-
-// API key .env file se aati hai (VITE_TMDB_KEY)
-const API_KEY = import.meta.env.VITE_TMDB_KEY;
+// TMDB ko seedhe browser se call nahi karte - kuch ISPs api.themoviedb.org
+// ko block karte hain (VPN ke bina fail hota tha), aur API key bhi client
+// bundle me expose nahi karni thi. Isliye ek apna server-side proxy hai:
+// - production me: /api/tmdb/* -> Netlify Function (netlify/functions/tmdb.js)
+// - local dev me: /api/tmdb/* -> vite.config.js ka dev-server proxy
+const API_BASE = "/api/tmdb";
 
 /*
   Ye main function hai jo TMDB se data laata hai.
@@ -22,10 +21,9 @@ const API_KEY = import.meta.env.VITE_TMDB_KEY;
   Example: fetchFromTmdb("movie/popular", { page: 1 })
 */
 export async function fetchFromTmdb(endpoint, params = {}) {
-  // api_key ke saath baaki params ko URL query string me badal rahe hain
-  const searchParams = new URLSearchParams({ api_key: API_KEY, ...params });
+  const searchParams = new URLSearchParams(params);
 
-  const finalUrl = `${TMDB_BASE_URL}/${endpoint}?${searchParams.toString()}`;
+  const finalUrl = `${API_BASE}/${endpoint}?${searchParams.toString()}`;
 
   const response = await fetch(finalUrl);
 
