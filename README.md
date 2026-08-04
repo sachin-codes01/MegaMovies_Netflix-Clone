@@ -1,5 +1,20 @@
 # MegaMovies — Movie & TV Discovery App
 
+<p align="center">
+  <a href="https://megamovies-webapp.netlify.app"><img src="https://img.shields.io/badge/Live_Demo-Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="Live Demo" /></a>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Material_UI-007FFF?style=for-the-badge&logo=mui&logoColor=white" alt="Material UI" />
+  <img src="https://img.shields.io/badge/TMDB_API-01B4E4?style=for-the-badge&logo=themoviedatabase&logoColor=white" alt="TMDB API" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/last-commit/sachin-codes01/MegaMovies_Netflix-Clone?style=flat-square&color=0f172a" alt="Last commit" />
+  <img src="https://img.shields.io/github/languages/top/sachin-codes01/MegaMovies_Netflix-Clone?style=flat-square&color=f7df1e" alt="Top language" />
+  <img src="https://img.shields.io/github/repo-size/sachin-codes01/MegaMovies_Netflix-Clone?style=flat-square&color=38bdf8" alt="Repo size" />
+</p>
+
 A Netflix-style movie and TV show discovery app built with React 19, Vite, Tailwind CSS v4, and Material UI, powered by the TMDB API. Browse trending titles, search instantly, watch trailers, and build your own watchlist and favorites — all saved per account in the browser.
 
 ## 🌐 Live Demo
